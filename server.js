@@ -191,7 +191,7 @@ function handlePostback(sender_psid, received_postback) {
         callSendAPI(sender_psid, response, function(){
             callSendAPI(sender_psid, askTemplate('Show me more'));
         });
-    } else if(payload === 'GET_STARTED'){
+    } else if(payload === 'Get Started'){
         response = askTemplate('Are you a Cat or Dog Person?');
         callSendAPI(sender_psid, response);
     }
