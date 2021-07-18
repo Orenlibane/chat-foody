@@ -1,5 +1,7 @@
 'use strict'
 
+const { response } = require('express');
+
 let express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
@@ -57,10 +59,10 @@ app.post('/webhook', (req, res) => {
         });
 
         // Returns a '200 OK' response to all requests
-        res.status(200).send('EVENT_RECEIVED');
+        response.status(200).send('EVENT_RECEIVED');
     } else {
         // Returns a '404 Not Found' if event is not from a page subscription
-        res.sendStatus(404);
+        response.sendStatus(404);
     }
 
 });
@@ -69,7 +71,7 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
 
     // Your verify token. Should be a random string.
-    let VERIFY_TOKEN = "1476955067";
+    let VERIFY_TOKEN = "abcd1234";
 
     // Parse the query params
     let mode = req.query['hub.mode'];
@@ -84,11 +86,11 @@ app.get('/webhook', (req, res) => {
 
             // Responds with the challenge token from the request
             console.log('WEBHOOK_VERIFIED');
-            res.status(200).send(challenge);
+            response.status(200).send(challenge);
 
         } else {
             // Responds with '403 Forbidden' if verify tokens do not match
-            res.sendStatus(403);
+            response.sendStatus(403);
         }
     }
 });
